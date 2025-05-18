@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: retail-billing-service
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/billing
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
