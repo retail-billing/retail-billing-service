@@ -1,5 +1,6 @@
 package com.ashish.retailbillingservice.exception.handler;
 
+import com.ashish.retailbillingservice.exception.BadRequestException;
 import com.ashish.retailbillingservice.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -10,6 +11,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handle(BadRequestException ex) {
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.toString(), ex.getMessage());
+    }
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)

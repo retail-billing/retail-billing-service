@@ -10,3 +10,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/billing
     username: ${DB_USER:postgres}
     password: ${DB_PASSWORD:postgres}
+
+aws:
+  access-key-id: ${AWS_ACCESS_KEY_ID}
+  secret-access-key: ${AWS_SECRET_ACCESS_KEY}
+  region: ap-south-1
+  bucket-name: billing-service-0926

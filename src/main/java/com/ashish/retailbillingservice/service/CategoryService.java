@@ -7,18 +7,23 @@ import com.ashish.retailbillingservice.exception.NotFoundException;
 import com.ashish.retailbillingservice.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
 
+    private final FileUploadService fileUploadService;
     private final CategoryRepository categoryRepository;
 
-    public CategoryResponse addCategory(CategoryRequest categoryRequest) {
+    public CategoryResponse addCategory(CategoryRequest categoryRequest, MultipartFile file) {
         CategoryEntity newCategory = CategoryEntity.from(categoryRequest);
+        String imageUrl = fileUploadService.uploadFile(file);
+        newCategory.setImageUrl(imageUrl);
         CategoryEntity categoryEntity = categoryRepository.save(newCategory);
         return CategoryResponse.from(categoryEntity);
     }
@@ -31,8 +36,11 @@ public class CategoryService {
     }
 
     public void deleteCategory(String categoryId) {
-        categoryRepository.findByCategoryId(categoryId)
-                .ifPresentOrElse(categoryRepository::delete, () -> {
+        Optional<CategoryEntity> optionalCategoryEntity = categoryRepository.findByCategoryId(categoryId);
+        optionalCategoryEntity.ifPresentOrElse(categoryEntity -> {
+            categoryRepository.delete(categoryEntity);
+            fileUploadService.deleteFile(categoryEntity.getImageUrl());
+        }, () -> {
                     throw new NotFoundException("Category not found");
                 });
     }
