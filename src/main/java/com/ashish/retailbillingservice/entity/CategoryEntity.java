@@ -1,6 +1,6 @@
 package com.ashish.retailbillingservice.entity;
 
-import com.ashish.retailbillingservice.dto.CategoryRequest;
+import com.ashish.retailbillingservice.dto.category.CategoryRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

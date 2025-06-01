@@ -1,7 +1,7 @@
 package com.ashish.retailbillingservice.service;
 
-import com.ashish.retailbillingservice.dto.CategoryRequest;
-import com.ashish.retailbillingservice.dto.CategoryResponse;
+import com.ashish.retailbillingservice.dto.category.CategoryRequest;
+import com.ashish.retailbillingservice.dto.category.CategoryResponse;
 import com.ashish.retailbillingservice.entity.CategoryEntity;
 import com.ashish.retailbillingservice.exception.NotFoundException;
 import com.ashish.retailbillingservice.repository.CategoryRepository;

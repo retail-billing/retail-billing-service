@@ -7,12 +7,19 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/billing
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/billing}
     username: ${DB_USER:postgres}
     password: ${DB_PASSWORD:postgres}
+  servlet:
+    multipart:
+      max-file-size: 2MB
 
 aws:
   access-key-id: ${AWS_ACCESS_KEY_ID}
   secret-access-key: ${AWS_SECRET_ACCESS_KEY}
   region: ap-south-1
   bucket-name: billing-service-0926
+
+jwt:
+  secret:
+    key: ${JWT_SECRET_KEY:this-is-the-default-secret-key}

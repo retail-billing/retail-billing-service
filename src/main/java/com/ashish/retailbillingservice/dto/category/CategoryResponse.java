@@ -1,4 +1,4 @@
-package com.ashish.retailbillingservice.dto;
+package com.ashish.retailbillingservice.dto.category;
 
 import com.ashish.retailbillingservice.entity.CategoryEntity;
 import lombok.Builder;

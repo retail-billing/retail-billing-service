@@ -1,4 +1,4 @@
-package com.ashish.retailbillingservice.dto;
+package com.ashish.retailbillingservice.dto.category;
 
 import com.ashish.retailbillingservice.exception.BadRequestException;
 import lombok.AllArgsConstructor;
