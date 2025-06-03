@@ -44,4 +44,9 @@ public class CategoryService {
                     throw new NotFoundException("Category not found");
                 });
     }
+
+    public CategoryEntity fetchCategoryById(String categoryId) {
+        return categoryRepository.findByCategoryId(categoryId)
+                .orElseThrow(() -> new NotFoundException("Category not found with id: " + categoryId));
+    }
 }
