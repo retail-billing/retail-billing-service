@@ -1,6 +1,7 @@
 package com.ashish.retailbillingservice.dto.user;
 
 import com.ashish.retailbillingservice.entity.UserEntity;
+import com.ashish.retailbillingservice.enums.UserRole;
 import lombok.Builder;
 import lombok.Data;
 
@@ -20,7 +21,7 @@ public class UserResponse {
                 .userId(userEntity.getUserId())
                 .name(userEntity.getName())
                 .email(userEntity.getEmail())
-                .role(userEntity.getRole())
+                .role(UserRole.getUserType(userEntity.getRole()))
                 .createdAt(userEntity.getCreatedAt().toString())
                 .updatedAt(userEntity.getUpdatedAt().toString())
                 .build();

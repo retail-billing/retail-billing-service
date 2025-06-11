@@ -1,5 +1,6 @@
 package com.ashish.retailbillingservice.dto.auth;
 
+import com.ashish.retailbillingservice.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,6 @@ public class AuthResponse {
     private String role;
 
     public static AuthResponse from(String token, String email, String role) {
-        return new AuthResponse(token, email, role);
+        return new AuthResponse(token, email, UserRole.getUserType(role));
     }
 }

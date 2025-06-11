@@ -16,6 +16,7 @@ public class UserRequest {
 
     private String name;
     private String email;
+    private String phoneNumber;
     private String password;
     private String role;
 
@@ -28,6 +29,9 @@ public class UserRequest {
         }
         if (isBlank(password)) {
             throw new BadRequestException("Password cannot be blank");
+        }
+        if(isBlank(phoneNumber)) {
+            throw new BadRequestException("Phone number cannot be blank");
         }
         if (isBlank(role)) {
             throw new BadRequestException("Role cannot be blank");

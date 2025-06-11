@@ -34,6 +34,9 @@ public class UserEntity {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(unique = true, nullable = false)
+    private String phoneNumber;
+
     @Column(nullable = false)
     private String password;
 
@@ -52,12 +55,13 @@ public class UserEntity {
                 .userId(UUID.randomUUID().toString())
                 .name(request.getName())
                 .email(request.getEmail())
+                .phoneNumber(request.getPhoneNumber())
                 .password(encodedPassword)
                 .role(getUserRole(request))
                 .build();
     }
 
     private static String getUserRole(UserRequest request) {
-        return "ROLE_".concat(UserRole.fromString(request.getRole()).toString());
+        return UserRole.getUserRole(request.getRole());
     }
 }

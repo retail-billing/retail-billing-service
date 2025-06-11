@@ -21,11 +21,18 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public UserResponse createUser(UserRequest request) {
+        validateUserEmailAndPhoneNumberIsUnique(request);
+        UserEntity user = UserEntity.from(request, passwordEncoder.encode(request.getPassword()));
+        return UserResponse.from(userRepository.save(user));
+    }
+
+    private void validateUserEmailAndPhoneNumberIsUnique(UserRequest request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new BadRequestException("Email already exists");
         }
-        UserEntity user = UserEntity.from(request, passwordEncoder.encode(request.getPassword()));
-        return UserResponse.from(userRepository.save(user));
+        if(userRepository.findByPhoneNumber(request.getPhoneNumber()).isPresent()) {
+            throw new BadRequestException("Phone number already exists");
+        }
     }
 
     public String getUserRole(String email) {
